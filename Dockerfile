@@ -20,20 +20,21 @@
 FROM alpine:3.6
 MAINTAINER GoCD <go-cd-dev@googlegroups.com>
 
-LABEL gocd.version="17.9.0" \
+LABEL gocd.version="17.10.0" \
   description="GoCD agent based on alpine version 3.6" \
   maintainer="GoCD <go-cd-dev@googlegroups.com>" \
-  gocd.full.version="17.9.0-5368" \
-  gocd.git.sha="fd43db656e9d9b32d7ab9be1785208f346e9b1be"
+  gocd.full.version="17.10.0-5380" \
+  gocd.git.sha="05598d88fd4dabdde1184faa4fbffc5f9406d0dc"
 
 ADD https://github.com/krallin/tini/releases/download/v0.16.1/tini-static-amd64 /usr/local/sbin/tini
 ADD https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64 /usr/local/sbin/gosu
 
-# allow mounting ssh keys, dotfiles, and the go server config and data
-VOLUME /godata
 
 # force encoding
 ENV LANG=en_US.utf8
+
+ARG UID=1000
+ARG GID=1000
 
 RUN \
 # add mode and permissions for files we added above
@@ -43,15 +44,15 @@ RUN \
   chown root:root /usr/local/sbin/gosu && \
 # add our user and group first to make sure their IDs get assigned consistently,
 # regardless of whatever dependencies get added
-  addgroup -g 1000 go && \ 
-  adduser -D -u 1000 -G go go && \
+  addgroup -g ${GID} go && \ 
+  adduser -D -u ${UID} -G go go && \
   apk --no-cache upgrade && \
   apk add --no-cache openjdk8-jre-base git mercurial subversion openssh-client bash curl && \
 # download the zip file
-  curl --fail --location --silent --show-error "https://download.gocd.org/binaries/17.9.0-5368/generic/go-agent-17.9.0-5368.zip" > /tmp/go-agent.zip && \
+  curl --fail --location --silent --show-error "https://download.gocd.org/binaries/17.10.0-5380/generic/go-agent-17.10.0-5380.zip" > /tmp/go-agent.zip && \
 # unzip the zip file into /go-agent, after stripping the first path prefix
   unzip /tmp/go-agent.zip -d / && \
-  mv go-agent-17.9.0 /go-agent && \
+  mv go-agent-17.10.0 /go-agent && \
   rm /tmp/go-agent.zip && \
   # ensure that logs are printed to console output
   sed -i -e 's/\(log4j.rootLogger.*\)/\1, stdout/g' /go-agent/config/agent-bootstrapper-log4j.properties && \
