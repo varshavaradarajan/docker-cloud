@@ -1,0 +1,3 @@
+#!/bin/bash
+docker push varshavs/docker-cloud:agent-uid-2k
+docker push varshavs/docker-cloud:agent-uid-3k
