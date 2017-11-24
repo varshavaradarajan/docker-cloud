@@ -1,4 +1,5 @@
 #!/bin/bash
-echo $CACHE_TAG
+echo "FML"
+echo "$CACHE_TAG"
 docker build --build-arg UID=2000 --build-arg GID=2000 -t varshavs/docker-cloud:"$CACHE_TAG"-agent-uid-2k .
 docker build --build-arg UID=3000 --build-arg GID=3000 -t varshavs/docker-cloud:"$CACHE_TAG"-agent-uid-3k .
