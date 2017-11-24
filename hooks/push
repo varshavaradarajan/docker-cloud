@@ -1,3 +1,3 @@
 #!/bin/bash
-docker push varshavs/docker-cloud:agent-uid-2k-{sourceref}
-docker push varshavs/docker-cloud:agent-uid-3k-{sourceref}
+docker push varshavs/docker-cloud:$CACHE_TAG-agent-uid-2k
+docker push varshavs/docker-cloud:$CACHE_TAG-agent-uid-3k .
