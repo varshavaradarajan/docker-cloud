@@ -1,3 +1,4 @@
 #!/bin/bash
-docker build --build-arg UID=2000 --build-arg GID=2000 -t docker-cloud:agent-uid-2k .
-docker build --build-arg UID=3000 --build-arg GID=3000 -t docker-cloud:agent-uid-3k .
+
+docker build --build-arg UID=2000 --build-arg GID=2000 -t varshavs/docker-cloud:agent-uid-2k-{sourceref} .
+docker build --build-arg UID=3000 --build-arg GID=3000 -t varshavs/docker-cloud:agent-uid-3k-{sourceref} .
