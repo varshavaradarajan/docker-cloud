@@ -1,3 +1,4 @@
 #!/bin/bash
-docker push varshavs/docker-cloud:$CACHE_TAG-agent-uid-2k
-docker push varshavs/docker-cloud:$CACHE_TAG-agent-uid-3k .
+echo $CACHE_TAG
+docker push varshavs/docker-cloud:"$CACHE_TAG"-agent-uid-2k
+docker push varshavs/docker-cloud:"$CACHE_TAG"-agent-uid-3k .
